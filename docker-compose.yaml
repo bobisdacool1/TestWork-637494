@@ -1,0 +1,32 @@
+version: "3.3"
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/Nginx.Dockerfile
+    ports:
+      - 8014:80
+    links:
+      - fpm
+    volumes:
+      - ./:/var/www/mello
+  fpm:
+    build:
+      context: .
+      dockerfile: docker/Fpm.Dockerfile
+    volumes:
+      - ./:/var/www/mello
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+    links:
+      - postresql
+  postgresql:
+    build:
+      context: .
+      dockerfile: docker/Postgres.Dockerfile
+    ports:
+      - 54328:5432
+    environment:
+      POSTGRES_DB: "mello"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "root"
