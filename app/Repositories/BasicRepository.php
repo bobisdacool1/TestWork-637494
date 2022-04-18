@@ -1,33 +1,38 @@
-<?php
+<?php /** @noinspection PhpInconsistentReturnPointsInspection */
 
 
 namespace App\Repositories;
 
 
-use App\Models\Channel;
+use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use App\Repositories\Interfaces\IBasicRepository;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 abstract class BasicRepository extends Repository implements IBasicRepository
 {
     public function getAll(int $quantity = 50, array $sort = ['field' => 'created_at', 'order' => 'asc'])
     {
         try {
-            return $this->getModelWithRelations()
-                ->take($quantity)
-                ->orderBy($sort['field'], $sort['order'])
-                ->get()
-                ->toArray();
-        } catch (\Exception $e) {
+            return $this->getResource()::collection(
+                $this->getModelWithRelations()
+                    ->take($quantity)
+                    ->orderBy($sort['field'], $sort['order'])
+                    ->get()
+            );
+        } catch (Exception $e) {
             abort(400, $e->getMessage());
         }
     }
 
-    public function getById(int $channelId)
+    public function getById(int $id)
     {
         try {
-            return $this->getModelWithRelations()->where('id', $channelId)->first();
-        } catch (\Exception $e) {
+            return $this->getResource()::collection(
+                $this->getModelWithRelations()->where('id', $id)->first()
+            );
+        } catch (Exception $e) {
             abort(400, $e->getMessage());
         }
     }
@@ -35,16 +40,19 @@ abstract class BasicRepository extends Repository implements IBasicRepository
     public function search(array $searchFields = [], array $searchPivotFields = [], array $sort = ['field' => 'created_at', 'order' => 'asc'])
     {
         try {
-            return $this->getModelWithRelations()
-                ->where(function ($query) use ($searchFields) {
-                    foreach ($searchFields as $searchKey => $searchValue) {
-                        $query->where($searchKey, 'LIKE', "%$searchValue%");
-                    }
-                })
-                ->take(10)
-                ->orderBy($sort['field'], $sort['order'])
-                ->get();
-        } catch (\Exception $e) {
+            // maybe that's too heavy, idk
+            return $this->getResource()::collection(
+                $this->getModelWithRelations()
+                    ->where(function ($query) use ($searchFields) {
+                        foreach ($searchFields as $searchKey => $searchValue) {
+                            $query->where($searchKey, 'LIKE', "%$searchValue%");
+                        }
+                    })
+                    ->take(10)
+                    ->orderBy($sort['field'], $sort['order'])
+                    ->get()
+            );
+        } catch (Exception $e) {
             abort(400, $e->getMessage());
         }
     }
@@ -52,13 +60,13 @@ abstract class BasicRepository extends Repository implements IBasicRepository
     public function destroy(int $channelId)
     {
         try {
-            $channel = $this->getModel()::where('id', $channelId)->first();
+            $model = $this->getModel()::where('id', $channelId)->first();
 
-            if ($channel == null)
+            if ($model == null)
                 abort(400);
 
-            return $channel->delete();
-        } catch (\Exception $e) {
+            return $model->delete();
+        } catch (Exception $e) {
             abort(400, $e->getMessage());
         }
     }
@@ -66,16 +74,16 @@ abstract class BasicRepository extends Repository implements IBasicRepository
     public function update(int $channelId, array $fields)
     {
         try {
-            $channel = $this->getModelWithRelations()->where('id', $channelId)->first();
+            $model = $this->getModelWithRelations()->where('id', $channelId)->first();
 
-            if ($channel == null)
+            if ($model == null)
                 abort(400);
 
-            $channel->fill($fields);
-            $channel->save();
+            $model->fill($fields);
+            $model->save();
 
-            return $channel;
-        } catch (\Exception $e) {
+            return $this->getResource()::collection($model);
+        } catch (Exception $e) {
             abort(400, $e->getMessage());
         }
     }
@@ -83,31 +91,30 @@ abstract class BasicRepository extends Repository implements IBasicRepository
     public function save(array $fields)
     {
         try {
-            $channel = new ($this->getModel())();
-            $channel->fill($fields);
-            $channel->save();
+            $model = new ($this->getModel())();
+            $model->fill($fields);
+            $model->save();
 
-            return $channel;
-        } catch (\Exception $e) {
+            return $this->getResource()::collection($model);
+        } catch (Exception $e) {
             abort(400, $e->getMessage());
         }
     }
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
 
-    protected function getModelWithRelations()
-    {
-        abort(400, 'Non implemented');
-    }
+    abstract protected function getModelWithRelations();
 
     /**
      * @return Model
      */
-    protected function getModel()
-    {
-        abort(400, 'Non implemented repository');
-    }
+    abstract protected function getModel();
+
+    /**
+     * @return JsonResource
+     */
+    abstract protected function getResource();
 }

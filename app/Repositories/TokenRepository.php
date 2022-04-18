@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpInconsistentReturnPointsInspection */
 
 
 namespace App\Repositories;
@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Models\User;
 use App\Repositories\Interfaces\ITokenRepository;
+use Exception;
 
 class TokenRepository extends Repository implements ITokenRepository
 {
@@ -15,7 +16,7 @@ class TokenRepository extends Repository implements ITokenRepository
             $user = User::where('id', $userId)->first();
             return $user->newApiToken($tokenName);
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             abort(400, $e->getMessage());
         }
     }
