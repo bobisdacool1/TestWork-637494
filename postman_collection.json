@@ -1,0 +1,480 @@
+{
+	"info": {
+		"_postman_id": "7b6a76af-37c3-4e66-964c-20c19aed8428",
+		"name": "Mello_task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Channel",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8014/api/channel/index?count=2&sort_by=name&sort_order=asc",
+							"host": [
+								"localhost"
+							],
+							"port": "8014",
+							"path": [
+								"api",
+								"channel",
+								"index"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "2"
+								},
+								{
+									"key": "sort_by",
+									"value": "name"
+								},
+								{
+									"key": "sort_order",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8014/api/channel/show/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8014",
+							"path": [
+								"api",
+								"channel",
+								"show",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8014/api/channel/search?search[name]=Funk&search_pivot[name]=Prof.&sort_order=desc&sort_by=id",
+							"host": [
+								"localhost"
+							],
+							"port": "8014",
+							"path": [
+								"api",
+								"channel",
+								"search"
+							],
+							"query": [
+								{
+									"key": "search[name]",
+									"value": "Funk"
+								},
+								{
+									"key": "search_pivot[name]",
+									"value": "Prof."
+								},
+								{
+									"key": "sort_order",
+									"value": "desc"
+								},
+								{
+									"key": "sort_by",
+									"value": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8014/api/channel/store?name=Mamix",
+							"host": [
+								"localhost"
+							],
+							"port": "8014",
+							"path": [
+								"api",
+								"channel",
+								"store"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Mamix"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8014/api/channel/update/51?name=firamir",
+							"host": [
+								"localhost"
+							],
+							"port": "8014",
+							"path": [
+								"api",
+								"channel",
+								"update",
+								"51"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "firamir"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8014/api/channel/destroy/51",
+							"host": [
+								"localhost"
+							],
+							"port": "8014",
+							"path": [
+								"api",
+								"channel",
+								"destroy",
+								"51"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscriber",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8014/api/subscriber/index?count=2&sort_by=name&sort_order=asc",
+							"host": [
+								"localhost"
+							],
+							"port": "8014",
+							"path": [
+								"api",
+								"subscriber",
+								"index"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "2"
+								},
+								{
+									"key": "sort_by",
+									"value": "name"
+								},
+								{
+									"key": "sort_order",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8014/api/subscriber/show/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8014",
+							"path": [
+								"api",
+								"subscriber",
+								"show",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8014/api/subscriber/search?search_pivot[name]=Breitenberg&sort_order=desc&sort_by=id",
+							"host": [
+								"localhost"
+							],
+							"port": "8014",
+							"path": [
+								"api",
+								"subscriber",
+								"search"
+							],
+							"query": [
+								{
+									"key": "search[name]",
+									"value": "fa",
+									"disabled": true
+								},
+								{
+									"key": "search_pivot[name]",
+									"value": "Breitenberg"
+								},
+								{
+									"key": "sort_order",
+									"value": "desc"
+								},
+								{
+									"key": "sort_by",
+									"value": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8014/api/subscriber/store?name=Mamix",
+							"host": [
+								"localhost"
+							],
+							"port": "8014",
+							"path": [
+								"api",
+								"subscriber",
+								"store"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Mamix"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8014/api/subscriber/update/51?name=firamir",
+							"host": [
+								"localhost"
+							],
+							"port": "8014",
+							"path": [
+								"api",
+								"subscriber",
+								"update",
+								"51"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "firamir"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8014/api/subscriber/destroy/51",
+							"host": [
+								"localhost"
+							],
+							"port": "8014",
+							"path": [
+								"api",
+								"subscriber",
+								"destroy",
+								"51"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8014/api/token/new?user_id=1&token_name=Test token",
+					"host": [
+						"localhost"
+					],
+					"port": "8014",
+					"path": [
+						"api",
+						"token",
+						"new"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						},
+						{
+							"key": "token_name",
+							"value": "Test token"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
