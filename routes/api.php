@@ -32,7 +32,6 @@ Route::controller(ChannelController::class)
         Route::post('destroy/{id}', 'destroy')->name('destroy');
         Route::post('update/{id}', 'update')->name('update');
         Route::post('store', 'store')->name('store');
-        Route::post('test', 'test')->name('test');
     });
 
 Route::controller(SubscriberController::class)
@@ -46,7 +45,6 @@ Route::controller(SubscriberController::class)
         Route::post('destroy/{id}', 'destroy')->name('destroy');
         Route::post('update/{id}', 'update')->name('update');
         Route::post('store', 'store')->name('store');
-        Route::post('test', 'test')->name('test');
     });
 
 // the code bellow is created for demonstration purposes

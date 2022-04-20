@@ -4,10 +4,8 @@
 namespace App\Http\Controllers\Api;
 
 
-use App\Http\Requests\ChannelSearchRequest;
-use App\Http\Requests\ChannelsGetRequset;
-use App\Http\Requests\ChannelStoreRequest;
-use App\Http\Requests\ChannelUpdateRequest;
+use App\Http\Requests\Basic\IndexRequest;
+use App\Http\Requests\Basic\SearchRequest;
 
 abstract class BasicController extends ApiController
 {
@@ -16,10 +14,8 @@ abstract class BasicController extends ApiController
         abort(400, 'Non implemented');
     }
 
-    public function index(ChannelsGetRequset $request)
+    public function index(IndexRequest $request)
     {
-        $request->validated();
-
         $sort['field'] = $request->input('sort_by', 'created_at');
         $sort['order'] = $request->input('sort_order', 'asc');
         $count = $request->input('count', 50);
@@ -36,10 +32,8 @@ abstract class BasicController extends ApiController
         return response()->json($channel);
     }
 
-    public function search(ChannelSearchRequest $request)
+    public function search(SearchRequest $request)
     {
-        $request->validated();
-
         $sort['field'] = $request->input('sort_by', 'created_at');
         $sort['order'] = $request->input('sort_order', 'asc');
 
@@ -50,26 +44,6 @@ abstract class BasicController extends ApiController
 
         return response()->json($channels);
 
-    }
-
-    public function store(ChannelStoreRequest $request)
-    {
-        $request->validated();
-
-        $channelFields['name'] = $request->input('name');
-
-        $channel = $this->repository->save($channelFields);
-
-        return response()->json($channel);
-    }
-
-    public function update(ChannelUpdateRequest $request, int $channelId)
-    {
-        $attributes['name'] = $request->name;
-
-        $channel = $this->repository->update($channelId, $attributes);
-
-        return response()->json($channel);
     }
 
     public function destroy(int $channelId)

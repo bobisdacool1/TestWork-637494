@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Basic;
 
-use App\Http\Requests\Basic\StoreRequest;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class SubscriberStoreRequest extends StoreRequest
+class StoreRequest extends FormRequest
 {
     public function authorize()
     {

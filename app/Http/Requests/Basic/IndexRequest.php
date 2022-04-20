@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Basic;
 
-use App\Http\Requests\Basic\StoreRequest;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class SubscriberStoreRequest extends StoreRequest
+class IndexRequest extends FormRequest
 {
     public function authorize()
     {
@@ -19,7 +19,9 @@ class SubscriberStoreRequest extends StoreRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:5'
+            'count' => 'int',
+            'sort_order' => 'in:asc,desc',
+            'sort_by' => 'string'
         ];
     }
 }

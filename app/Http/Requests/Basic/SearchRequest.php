@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Basic;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class NewTokenRequest extends FormRequest
+class SearchRequest extends FormRequest
 {
     public function authorize()
     {
@@ -19,7 +19,11 @@ class NewTokenRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'int|exists:users,id'
+            'count' => 'int',
+            'sort_order' => 'in:asc,desc',
+            'sort_by' => 'string',
+            'search' => 'array',
+            'search_pivot' => 'array',
         ];
     }
 }
