@@ -9,10 +9,7 @@ use App\Http\Requests\Basic\SearchRequest;
 
 abstract class BasicController extends ApiController
 {
-    protected function newRepository()
-    {
-        abort(400, 'Non implemented');
-    }
+    abstract protected function newRepository();
 
     public function index(IndexRequest $request)
     {

@@ -19,8 +19,5 @@ class Controller extends BaseController
         $this->repository = $this->newRepository();
     }
 
-    protected function newRepository()
-    {
-        abort(400, 'Non implemented');
-    }
+    abstract protected function newRepository();
 }
