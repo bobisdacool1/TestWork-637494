@@ -48,4 +48,9 @@ class SubscriberRepository extends BasicRepository
     {
         return SubscriberResource::class;
     }
+
+    protected function newResource($object)
+    {
+        return new SubscriberResource($object);
+    }
 }

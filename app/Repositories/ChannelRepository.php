@@ -48,4 +48,9 @@ class ChannelRepository extends BasicRepository
     {
         return ChannelResource::class;
     }
+
+    protected function newResource($object)
+    {
+        return new ChannelResource($object);
+    }
 }

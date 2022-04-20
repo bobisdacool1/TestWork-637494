@@ -4,10 +4,11 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Basic\IndexRequest;
 use App\Http\Requests\Basic\SearchRequest;
 
-abstract class BasicController extends ApiController
+abstract class BasicController extends Controller
 {
     abstract protected function newRepository();
 

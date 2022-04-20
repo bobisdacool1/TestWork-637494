@@ -4,10 +4,10 @@
 namespace App\Repositories;
 
 
+use App\Repositories\Interfaces\IBasicRepository;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use App\Repositories\Interfaces\IBasicRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 abstract class BasicRepository extends Repository implements IBasicRepository
@@ -29,7 +29,7 @@ abstract class BasicRepository extends Repository implements IBasicRepository
     public function getById(int $id)
     {
         try {
-            return $this->getResource()::collection(
+            return $this->newResource(
                 $this->getModelWithRelations()->where('id', $id)->first()
             );
         } catch (Exception $e) {
@@ -82,7 +82,7 @@ abstract class BasicRepository extends Repository implements IBasicRepository
             $model->fill($fields);
             $model->save();
 
-            return $this->getResource()::collection($model);
+            return $this->newResource($model);
         } catch (Exception $e) {
             abort(400, $e->getMessage());
         }
@@ -95,7 +95,7 @@ abstract class BasicRepository extends Repository implements IBasicRepository
             $model->fill($fields);
             $model->save();
 
-            return $this->getResource()::collection($model);
+            return $this->newResource($model);
         } catch (Exception $e) {
             abort(400, $e->getMessage());
         }
@@ -117,4 +117,9 @@ abstract class BasicRepository extends Repository implements IBasicRepository
      * @return JsonResource
      */
     abstract protected function getResource();
+
+    /**
+     * @return JsonResource
+     */
+    abstract protected function newResource($object);
 }
