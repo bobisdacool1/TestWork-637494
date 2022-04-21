@@ -15,7 +15,7 @@ abstract class BasicRepository extends Repository implements IBasicRepository
     public function getAll(int $quantity = 50, array $sort = ['field' => 'created_at', 'order' => 'asc'])
     {
         try {
-            return $this->getResource()::collection(
+            return $this->newResourceCollection(
                 $this->getModelWithRelations()
                     ->take($quantity)
                     ->orderBy($sort['field'], $sort['order'])
@@ -41,7 +41,7 @@ abstract class BasicRepository extends Repository implements IBasicRepository
     {
         try {
             // maybe that's too heavy, idk
-            return $this->getResource()::collection(
+            return $this->newResourceCollection(
                 $this->getModelWithRelations()
                     ->where(function ($query) use ($searchFields) {
                         foreach ($searchFields as $searchKey => $searchValue) {
@@ -57,10 +57,10 @@ abstract class BasicRepository extends Repository implements IBasicRepository
         }
     }
 
-    public function destroy(int $channelId)
+    public function destroy(int $id)
     {
         try {
-            $model = $this->getModel()::where('id', $channelId)->first();
+            $model = $this->getModel()::where('id', $id)->first();
 
             if ($model == null)
                 abort(400);
@@ -114,9 +114,10 @@ abstract class BasicRepository extends Repository implements IBasicRepository
     abstract protected function getModel();
 
     /**
+     * @param $data
      * @return JsonResource
      */
-    abstract protected function getResource();
+    abstract protected function newResourceCollection($data);
 
     /**
      * @return JsonResource

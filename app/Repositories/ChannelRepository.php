@@ -13,7 +13,7 @@ class ChannelRepository extends BasicRepository
     public function search(array $searchFields = [], array $searchPivotFields = [], array $sort = ['field' => 'created_at', 'order' => 'asc'])
     {
         try {
-            return ChannelResource::collection(
+            return $this->newResourceCollection(
                 $this->getModelWithRelations()
                     ->where(function ($query) use ($searchFields) {
                         foreach ($searchFields as $searchKey => $searchValue) {
@@ -44,9 +44,9 @@ class ChannelRepository extends BasicRepository
         return Channel::class;
     }
 
-    protected function getResource()
+    protected function newResourceCollection($data)
     {
-        return ChannelResource::class;
+        return ChannelResource::collection($data);
     }
 
     protected function newResource($object)

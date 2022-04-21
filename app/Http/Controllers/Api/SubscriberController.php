@@ -20,9 +20,9 @@ class SubscriberController extends BasicController
         return response()->json($channel);
     }
 
-    public function update(SubscriberStoreRequest $request, int $channelId)
+    public function update(SubscriberStoreRequest $request, int $id)
     {
-        $channel = $this->repository->update($channelId, $request->validated());
+        $channel = $this->repository->update($id, $request->validated());
 
         return response()->json($channel);
     }

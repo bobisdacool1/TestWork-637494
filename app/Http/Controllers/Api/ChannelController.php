@@ -19,9 +19,9 @@ class ChannelController extends BasicController
         return response()->json($channel);
     }
 
-    public function update(ChannelStoreRequest $request, int $channelId)
+    public function update(ChannelStoreRequest $request, int $id)
     {
-        $channel = $this->repository->update($channelId, $request->validated());
+        $channel = $this->repository->update($id, $request->validated());
 
         return response()->json($channel);
     }

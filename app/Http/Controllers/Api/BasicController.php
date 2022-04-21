@@ -18,16 +18,16 @@ abstract class BasicController extends Controller
         $sort['order'] = $request->input('sort_order', 'asc');
         $count = $request->input('count', 50);
 
-        $channels = $this->repository->getAll($count, $sort);
+        $models = $this->repository->getAll($count, $sort);
 
-        return response()->json($channels);
+        return response()->json($models);
     }
 
-    public function show(int $channelId)
+    public function show(int $id)
     {
-        $channel = $this->repository->getById($channelId);
+        $model = $this->repository->getById($id);
 
-        return response()->json($channel);
+        return response()->json($model);
     }
 
     public function search(SearchRequest $request)
@@ -38,15 +38,15 @@ abstract class BasicController extends Controller
         $searchField = $request->input('search', []);
         $searchPivotField = $request->input('search_pivot', []);
 
-        $channels = $this->repository->search($searchField, $searchPivotField, $sort);
+        $models = $this->repository->search($searchField, $searchPivotField, $sort);
 
-        return response()->json($channels);
+        return response()->json($models);
 
     }
 
-    public function destroy(int $channelId)
+    public function destroy(int $id)
     {
-        $deleted = $this->repository->destroy($channelId);
+        $deleted = $this->repository->destroy($id);
 
         return response()->json(['deleted' => $deleted]);
     }

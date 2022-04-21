@@ -13,7 +13,7 @@ class SubscriberRepository extends BasicRepository
     public function search(array $searchFields = [], array $searchPivotFields = [], array $sort = ['field' => 'created_at', 'order' => 'asc'])
     {
         try {
-            return SubscriberResource::collection(
+            return $this->newResourceCollection(
                 $this->getModelWithRelations()
                     ->where(function ($query) use ($searchFields) {
                         foreach ($searchFields as $searchKey => $searchValue) {
@@ -44,9 +44,9 @@ class SubscriberRepository extends BasicRepository
         return Subscriber::class;
     }
 
-    protected function getResource()
+    protected function newResourceCollection($data)
     {
-        return SubscriberResource::class;
+        return SubscriberResource::collection($data);
     }
 
     protected function newResource($object)
